@@ -123,8 +123,6 @@ h1 .ow{color:var(--ow)}
 .spark{position:absolute;left:50%;top:23%;width:7px;height:7px;border-radius:50%;pointer-events:none;animation:fly .7s ease-out forwards}
 @keyframes fly{from{transform:translate(-50%,-50%) scale(1);opacity:1}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0);opacity:0}}
 
-footer{margin-top:36px;color:rgba(20,30,52,.72);font-size:.8rem;text-align:center;line-height:1.6;font-weight:400}
-footer code{background:#101a2e;color:#dfe7f5;border:1px solid rgba(255,255,255,.16);border-radius:4px;padding:0 5px}
 @media (max-width:560px){.rollbtn{padding:1rem 2.6rem}.hero{min-height:520px}.chip{min-width:112px;padding:14px 14px 12px}}
 </style>
 </head>
@@ -133,7 +131,7 @@ footer code{background:#101a2e;color:#dfe7f5;border:1px solid rgba(255,255,255,.
   <div class="bar">
     <div>
       <h1>Рандомайзер героев <span class="ow">Overwatch</span></h1>
-      <p class="sub"><span id="total">—</span> героев · выбор ролей · классика или мешок без повторений</p>
+      <p class="sub"><span id="total">—</span> героев</p>
     </div>
     <div class="soundwrap">
       <button id="sound" title="Громкость"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M14.8 8.7a4.4 4.4 0 0 1 0 6.6M17.2 6.2a8 8 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -189,13 +187,6 @@ footer code{background:#101a2e;color:#dfe7f5;border:1px solid rgba(255,255,255,.
 
   <h2 class="histhead">История<button class="ibtn" id="clearHist" type="button" title="Очистить историю"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button></h2>
   <div class="hist" id="history"><span class="empty-note">пока пусто</span></div>
-
-  <footer>
-    Фанатская утилита, с Blizzard не связана. Портреты взяты с фанатской вики
-    overwatch.fandom.com, сжаты в WebP (~320px) и вшиты прямо в файл — интернет не нужен.<br>
-    Ростер примерно на вторую половину 2025. Новых героев легко добавить в массив
-    <code>HEROES</code> и карту портретов <code>PORTRAITS</code> в начале скрипта.
-  </footer>
 </div>
 
 <script>
