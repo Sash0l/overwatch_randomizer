@@ -108,8 +108,8 @@ h1 .ow{color:var(--ow)}
 }
 .hint{text-align:center;color:#2b3a5c;font-size:.85rem;margin-top:8px;font-weight:600}
 .hint kbd{background:#101a2e;border:1px solid rgba(255,255,255,.18);border-bottom-width:2px;border-radius:4px;padding:1px 8px;color:#fff;font-family:inherit;font-weight:400}
-.baginfo{color:#223252;font-size:.9rem;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:400}
-.baginfo.flash{color:#0089c2;animation:flash .8s}
+.baginfo{color:#181818;font-size:.9rem;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:400}
+.baginfo.flash{color:#181818;animation:flash .8s}
 .baginfo.pulse{animation:flash .8s}
 @keyframes flash{0%,100%{opacity:1}50%{opacity:.35}}
 
@@ -365,8 +365,8 @@ function pickClassic(p){
   return cands[Math.floor(Math.random()*cands.length)];
 }
 
-// --- Мешки по ролям: у каждой роли свой мешок; сначала равновероятно выбирается роль,
-// затем из её мешка вынимается шарик. Опустел — мешок роли наполняется заново.
+// --- Мешки по ролям: выбирается непустая активная роль, затем из неё вынимается шарик.
+// Когда в активных ролях шариков не осталось, мешок наполняется заново при следующем броске.
 function drawFromBag(p){
   const roles=[...state.roles];
   const sig=roles.map(r=>r+p.filter(h=>h.r===r).length).join("|");
@@ -393,12 +393,14 @@ function drawFromBag(p){
       if(!bag.items[h.r].some(x=>x.n===h.n))bag.items[h.r].push(h);
     }
   }
-  const role=roles[Math.floor(Math.random()*roles.length)];
+  let available=roles.filter(r=>bag.items[r].length);
   let refilled=false;
-  if(!bag.items[role].length){
-    bag.items[role]=p.filter(h=>h.r===role);
+  if(!available.length){
+    roles.forEach(r=>{bag.items[r]=p.filter(h=>h.r===r);});
+    available=roles;
     refilled=true;
   }
+  const role=available[Math.floor(Math.random()*available.length)];
   const i=Math.floor(Math.random()*bag.items[role].length);
   return {hero:bag.items[role].splice(i,1)[0],refilled,left:roles.reduce((s,r)=>s+bag.items[r].length,0),total:p.length};
 }
